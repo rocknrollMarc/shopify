@@ -53,6 +53,8 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-awesome_print'
 
+  gem 'meta_request'
+
   gem 'better_errors'
   gem 'web-console'
   gem 'quiet_assets'
@@ -70,3 +72,5 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
+
+gem 'shopify_api'
