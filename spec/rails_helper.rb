@@ -6,7 +6,6 @@ require 'rspec/rails'
 require 'Capybara/rspec'
 require 'selenium-webdriver'
 require 'factory_girl'
-require 'faker'
 require 'database_cleaner'
 # Add additional requires below this line. Rails is not loaded until this point!
 

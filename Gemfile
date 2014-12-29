@@ -40,6 +40,8 @@ group :development, :test do
 
   gem 'guard-rspec'
   gem 'guard-bundler'
+  gem 'guard'
+  gem 'guard-rails'
   gem 'guard-livereload'
   gem 'terminal-notifier-guard'
   gem 'ruby-growl'
