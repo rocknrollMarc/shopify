@@ -41,6 +41,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard'
+  gem 'launchy'
   gem 'guard-rails'
   gem 'guard-livereload'
   gem 'terminal-notifier-guard'
