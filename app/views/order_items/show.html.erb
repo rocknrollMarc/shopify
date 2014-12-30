@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @order_item.order_id %>
+</p>
+
+<p>
+  <strong>Variant:</strong>
+  <%= @order_item.variant_id %>
+</p>
+
+<p>
+  <strong>Shopify product:</strong>
+  <%= @order_item.shopify_product_id %>
+</p>
+
+<p>
+  <strong>Shopify variant:</strong>
+  <%= @order_item.shopify_variant_id %>
+</p>
+
+<p>
+  <strong>Unit price:</strong>
+  <%= @order_item.unit_price %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @order_item.quantity %>
+</p>
+
+<%= link_to 'Edit', edit_order_item_path(@order_item) %> |
+<%= link_to 'Back', order_items_path %>
