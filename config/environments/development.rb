@@ -6,6 +6,11 @@ Contestapp::Application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  SHOPIFY_API_KEY = 'bdd1281ca442ef30fcee1963f7ba356d'
+  SHOPIFY_SHARED_SECRET = '72a535bdf08152a1f9fdf93699e8cb84'
+  DOMAIN = 'https://mampaey.myshopify.com/admin/apps/private/9507639'
+
+
   # Do not eager load code on boot.
   config.eager_load = false
 

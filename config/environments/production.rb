@@ -1,6 +1,9 @@
 Contestapp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  SHOPIFY_API_KEY = ENV["SHOPIFY_API_KEY"]
+  SHOPIFY_SHARED_SECRET = ENV["SHOPIFY_SHARED_SECRET"]
+  DOMAIN = ENV["DOMAIN"]
   # Code is not reloaded between requests.
   config.cache_classes = true
 
