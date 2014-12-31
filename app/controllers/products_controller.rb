@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = current_account.products.all
   end
 
   # GET /products/1
@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new
+    @product = current_account.products.new
   end
 
   # GET /products/1/edit
@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(product_params)
+    @product = current_account.products.new(products_params)
 
     respond_to do |format|
       if @product.save
@@ -64,13 +64,14 @@ class ProductsController < ApplicationController
   # GET /products/import
   # GET /products/import.json
   def import
+    # Connect to shopify
+    shopify_integration = ShopifyIntegration.new(url: current_account.shopify_account_url,
+                                                 password: current_account.shopify_password,
+                                                 account_id: current_account.id
+                                                )
     # For now we'll use the first Account in the database
     account = Account.first
     # Instantiate the ShopifyIntegration class
-    shopify_integration = ShopifyIntegration.new(api_key: account.shopify_api_key,
-                                                 shared_secret: account.shopify_shared_secret,
-                                                 url: account.shopify_account_url,
-                                                 password: account.shopify_password)
 
     respond_to do |format|
       shopify_integration.connect
@@ -82,7 +83,7 @@ class ProductsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_product
-    @product = Product.find(params[:id])
+    @product = current_account.products.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

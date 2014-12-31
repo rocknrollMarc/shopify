@@ -1,23 +1,40 @@
-require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe Account, :type => :model do
-
-  it 'is invalid without a shopify_account_url' do
-    account = FactoryGirl.build(:account, shopify_account_url: nil)
-    account.valid?
-    expect(account.errors[:shopify_account_url] ).to include("can't be blank") 
+describe Account do
+  before do
+    @account = FactoryGirl.create(:account)
   end
 
-  it 'is invalid without a shopify_password' do
-    account = FactoryGirl.build(:account, shopify_password: nil)
-    account.valid?
-    expect(account.errors[:shopify_password] ).to include("can't be blank") 
+  context "contests_run(start_date, end_date)" do
+    it "should return the correct number of contests" do
+        @contest1 = FactoryGirl.create(:contest, :account_id => @account.id, :created_at => DateTime.now - 5.days)
+        @contest2 = FactoryGirl.create(:contest, :account_id => @account.id, :created_at => DateTime.now - 5.days)
+        @contest3 = FactoryGirl.create(:contest, :account_id => @account.id, :created_at => DateTime.now - 4.days)
+        @contest4 = FactoryGirl.create(:contest, :account_id => @account.id, :created_at => DateTime.now - 4.days)
+        @contest5 = FactoryGirl.create(:contest, :account_id => @account.id, :created_at => DateTime.now - 3.days)
+        @contest6 = FactoryGirl.create(:contest, :account_id => @account.id, :created_at => DateTime.now - 2.days)
+        @contest7 = FactoryGirl.create(:contest, :account_id => @account.id, :created_at => DateTime.now - 1.days)
+
+        @account.contests_run(DateTime.now - 5.days, DateTime.now).should == 7
+        @account.contests_run(DateTime.now - 4.days, DateTime.now).should == 5
+        @account.contests_run(DateTime.now - 1.days, DateTime.now).should == 1
+        @account.contests_run(DateTime.now, DateTime.now).should == 0
+
+    end
   end
 
-  it 'is invalid without a shared_secret' do
-    account = FactoryGirl.build(:account, shopify_shared_secret: nil)
-    account.valid?
-    expect(account.errors[:shopify_shared_secret]).to include("can't be blank") 
-    
+  context "can_create_contests?" do
+    it "should return true for paid accounts" do
+      @account = FactoryGirl.create(:account, paid: true)
+      @account.can_create_contests?.should be_true
+    end
+
+    it "should return true for paid accounts" do
+      @account = FactoryGirl.create(:account, paid: true)
+      @account.can_create_contests?.should be_true
+    end
+
   end
+
+
 end

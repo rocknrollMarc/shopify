@@ -1,6 +1,9 @@
 
 Contestapp::Application.routes.draw do
 
+  get "sessions/new"
+  post "sessions/create"
+  get "sessions/destroy"
   resources :orders do
     collection do
       get 'import'
