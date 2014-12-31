@@ -12,6 +12,18 @@ class ShopifyIntegration
     end
   end
 
+  def self.verify(params)
+    hash = params.slice(:code, :shop, :signiture, :timestamp)
+    received_signiture = hash.delete(:signiture)
+    # Collect the URL parameters into an array of elements
+    calc = calc.sort
+    # join the array elements into a string
+    calc = calc.join
+    # Final calculated signiture to compare against
+    calc = Digest::MD5.hexdigest(SHOPIFY_SHARED_SECRET + calc)
+    return calc == received_signiture
+  end
+
   # Uses the provided credentials to create an active Shopify session
   def connect
 

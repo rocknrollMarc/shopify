@@ -3,6 +3,30 @@ require 'spec_helper'
 describe ShopifyIntegration do
 
   
+  context 'self.verify' do
+    it 'should return true if the signiture matches' do
+
+    # Assume we have the query parameters in a hash
+    #
+    query_parameters = {
+      shop: 'some-shop.myshopify.com',
+      code: 'a94a110d86d2452eb3e2af4cfb8a3828',
+      timestamp: '1337178173',
+      signiture: '929b77106a419bde96bde96b151b318557a11' }
+
+    ShopifyIntegration.verify(query_parameters).should be_true
+    end
+
+    it 'should return false if the signiture DOES NOT match' do
+      # Assume we have the query parameters in a hash
+      query_parameters = {
+        shop: 'some-shop.myshopify.com',
+        code: 'a94a110d86d2452eb3e2af4cfb8a3828',
+        timestamp: '1337178173',
+        signiture: '929b77106a419bde96bde96b151b318557a43' }   # Changed
+        ShopifyIntegration.verify(query_parameters).should be_false
+    end
+  end
   context "initialize" do
     it "should raise exception if required parameters are not supplied" do
       expect {ShopifyIntegration.new(
