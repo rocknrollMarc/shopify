@@ -1,6 +1,12 @@
 
 Contestapp::Application.routes.draw do
 
+
+  get 'shopify/authorize' => 'shopify#authorize'
+  post 'shopify/authorize' => 'shopify#authorize'
+  get 'shopify/install' => 'shopify#install'
+  post 'shopify/install' => 'shopify#install'
+
   get "sessions/new"
   post "sessions/create"
   get "sessions/destroy"
